@@ -19,15 +19,18 @@ export default function Home() {
     <main>
       <Container maxWidth="lg">
         <Box sx={styles.wrapper}>
-          <Image
-            src={PAGE.homeImageUrl}
-            alt="Star Wars Logo"
-            width={400}
-            height={400}
-            objectFit="contain"
-            priority
-            style={{ borderRadius: '16px' }}
-          />
+          <Box style={{ width: '400px', margin: '0 auto' }}>
+            <Image
+              src={PAGE.homeImageUrl}
+              alt="Star Wars Logo"
+              width={600}
+              height={400}
+              objectFit="contain"
+              priority
+              layout="responsive"
+              style={{ borderRadius: '16px', }}
+            />
+          </Box>
           <Typography variant="h1" component="h1" color="primary">
             {PAGE.title}
           </Typography>
