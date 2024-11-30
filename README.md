@@ -1,36 +1,71 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Star Wars Info App
+
+A powerful and interactive app built with Next.js, providing detailed information about characters, planets, and films from the Star Wars universe.
+
+## Features
+
+	•	🌌 Explore Characters: Search and browse through detailed profiles of your favorite Star Wars characters.
+	•	🌍 Discover Planets: Learn about planets, their population, climate, terrain, and more.
+	•	🎥 Films Information: Dive into the history of Star Wars films with related details.
+	•	⚡ Blazing Fast: Powered by Next.js for optimal performance and server-side rendering (SSR).
+	•	🔍 Search Functionality: Search characters and planets easily using the in-app search feature.
+	•	🎨 Material-UI Integration: Modern and responsive UI built with Material-UI.
 
 ## Getting Started
 
-First, run the development server:
+Follow these steps to get the app running locally:
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+Prerequisites
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Make sure you have the following installed:
+	•	Node.js (>= 14.x)
+	•	npm, yarn, or pnpm
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Installation
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+  1.	Clone this repository:
 
-## Learn More
+  `git clone https://github.com/your-username/star-wars-info-app.git
+cd star-wars-info-app`
 
-To learn more about Next.js, take a look at the following resources:
+  2.	Install dependencies:
+`
+  npm install
+   or
+yarn install
+`
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+  3.	Start the development server:
+`
+  npm run dev
+  or
+yarn dev `
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Open http://localhost:3000 in your browser to view the app.
 
-## Deploy on Vercel
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+  4.	Test application:
+`
+  npm run test
+  or
+yarn test `
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## API Integration
+
+This app fetches data from the Star Wars API (SWAPI). It leverages dynamic routing and SSR for faster and more efficient data handling.
+
+Example Endpoints
+
+	•	Characters: https://swapi.py4e.com/api/people/
+	•	Planets: https://swapi.py4e.com/api/planets/
+	•	Films: https://swapi.py4e.com/api/films/
+
+
+### Limitation
+  Currently due to the scope of the task and time limitaton, only 4 test is written with 5 pass and 5 fail
+
+## Acknowledgments
+
+	•	SWAPI for the Star Wars data.
+	•	Next.js for powering the application.
+	•	Material-UI for beautiful UI components.
