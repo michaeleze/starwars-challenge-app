@@ -4,7 +4,7 @@ import { useState, useEffect, useCallback } from 'react';
 import { ApiResponse } from '@/types/api';
 
 const BASE_URL = 'https://swapi.py4e.com/api';
-const CACHE_NAME = 'swapi-cache'; // Name for your cache
+const CACHE_NAME = 'swapi-cache'; 
 
 type UseFetchParams = {
   endpoint: string;
