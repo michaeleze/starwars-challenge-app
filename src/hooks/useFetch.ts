@@ -4,13 +4,14 @@ import { useState, useEffect, useCallback } from 'react';
 import { ApiResponse } from '@/types/api';
 
 const BASE_URL = 'https://swapi.py4e.com/api';
+const CACHE_NAME = 'swapi-cache'; // Name for your cache
 
 type UseFetchParams = {
   endpoint: string;
   page?: number;
   search?: string;
   id?: string[];
-}
+};
 
 export function useFetch<T>({
   endpoint,
@@ -22,16 +23,38 @@ export function useFetch<T>({
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<Error | null>(null);
 
+  // Generate a unique cache key based on parameters
+  const cacheKey = id
+    ? `${endpoint}/${id}`
+    : `${endpoint}?${new URLSearchParams({
+      ...(search && { search }),
+      ...(page && { page: page.toString() }),
+    }).toString()}`;
+
+  // Generate a url
+  const url = id
+    ? `${BASE_URL}/${endpoint}/${id}/`
+    : `${BASE_URL}/${endpoint}/?${new URLSearchParams({
+      ...(search && { search }),
+      ...(page && { page: page.toString() }),
+    })}`;
+
   const fetchData = useCallback(async () => {
     try {
       setIsLoading(true);
 
-      const url = id
-        ? `${BASE_URL}/${endpoint}/${id}/`
-        : `${BASE_URL}/${endpoint}/?${new URLSearchParams({
-          ...(search && { search }),
-          ...(page && { page: page.toString() }),
-        })}`;
+      // Open the cache
+      const cache = await caches.open(CACHE_NAME);
+
+      // Check if the data is already in the cache
+      const cachedResponse = await cache.match(cacheKey);
+
+      if (cachedResponse) {
+        const cachedData = await cachedResponse.json();
+        setData(cachedData as T | ApiResponse<T>);
+        setIsLoading(false);
+        return;
+      }
 
       const response = await fetch(url);
 
@@ -40,6 +63,10 @@ export function useFetch<T>({
       }
 
       const json = await response.json();
+
+      // Add the fetched response to the cache
+      await cache.put(cacheKey, new Response(JSON.stringify(json)));
+
       setData(json);
     } catch (err) {
       console.error('Fetch error:', err);
@@ -47,7 +74,7 @@ export function useFetch<T>({
     } finally {
       setIsLoading(false);
     }
-  }, [endpoint, page, search, id]);
+  }, [cacheKey, url]);
 
   useEffect(() => {
     fetchData();
